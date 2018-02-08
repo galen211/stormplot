@@ -1,0 +1,47 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+ike_date <- lubridate::ymd_hms("2008-09-13 12:00:00", tz = "GMT")
+ike_obs <- stormObservation("Ike",ike_date)
+first_row <- ike_obs[1,]
+
+## Load libraries
+Load the `stormplot` package
+```{r}
+devtools::load_all()
+```
+
+## Get a storm observation
+Storm observations include info on windspeed at different points in time for a specified storm.  The data covers all storms in the Atlantic basin from 1988–2015 (extended best tracks).
+```{r}
+ike_date <- lubridate::ymd_hms("2008-09-13 12:00:00", tz = "GMT")
+ike_obs <- stormObservation("Ike",ike_date)
+first_row <- ike_obs[1,]
+first_row
+```
+
+## Plot a storm observation (without map)
+We can use the `geom_hurricane` method to plot a 2-d visual representation of the hurricane's wind strength
+```{r}
+katrina_date <- lubridate::ymd_hms("2005-08-29 12:00:00", tz = "GMT")
+katrina <- stormObservation("Katrina", katrina_date)
+
+# demonstrates use of geom_hurricane
+ggplot(data = katrina) +
+  geom_hurricane(aes(x = longitude, y = latitude,
+                     r_ne = ne, r_se = se, r_nw = nw, r_sw = sw,
+                     fill = wind_speed, color = wind_speed)) +
+  scale_color_manual(name = "Wind speed (kts)",
+                     values = c("red", "orange", "yellow")) +
+  scale_fill_manual(name = "Wind speed (kts)",
+                    values = c("red", "orange", "yellow")) 
+
+```
+
+## Plot hurricane on map
+Mapping an observation is simplified with `mapObservation`
+```{r}
+mapObservation(ike_obs)
+```

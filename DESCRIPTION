@@ -1,9 +1,17 @@
 Package: stormplot
-Title: What the Package Does (one line, title case)
+Title: Package for plotting hurricane geoms
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Galen Simmons", email = "gs2592@columbia.edu", role = c("aut", "cre"))
+Description: Helps user plot hurrican geoms
 Depends: R (>= 3.3.2)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports: readr,
+    tidyr,
+    stringr,
+    lubridate,
+    geosphere,
+    ggmap,
+    ggplot2
+RoxygenNote: 6.0.1
